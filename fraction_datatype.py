@@ -10,24 +10,27 @@ class Fraction:
         if((a<0 and b <0) or b<0):
             self.denominator*=-1
             self.numerator*=-1
+
+    def __str__(self):
+        return f"{self.numerator}/{self.denominator}"
         
-    def add(self,other:Fraction):
+    def __add__(self,other:Fraction):
         if(self.denominator==other.denominator):
             return Fraction(self.numerator+other.numerator,self.denominator)
         else:
             return Fraction(self.numerator*other.denominator+self.denominator*other.numerator,self.denominator*other.denominator)
         
 
-    def sub(self,other:Fraction):
+    def __sub__(self,other:Fraction):
         if(self.denominator==other.denominator):
             return Fraction(self.numerator-other.numerator,self.denominator)
         else:
             return Fraction(self.numerator*other.denominator-self.denominator*other.numerator,self.denominator*other.denominator)
 
-    def multiply(self,other:Fraction):
+    def __mul__(self,other:Fraction):
         return Fraction(self.numerator*other.numerator,self.denominator*other.denominator)
     
-    def divide(self,other:Fraction):
+    def __truediv__(self,other:Fraction):
         if(other.denominator==0):
             raise ValueError(f"Invalid Denominator: {other.denominator}")
         return Fraction(self.numerator*other.denominator,self.denominator*other.numerator)
@@ -38,6 +41,11 @@ class Fraction:
 fraction_num1=Fraction(6,7)
 fraction_num2=Fraction(9,8)
 
-fraction_result=fraction_num1.add(fraction_num2)
-print(fraction_result.numerator)
-print(fraction_result.denominator)
+fraction_result1=fraction_num1+fraction_num2
+fraction_result2=fraction_num1-fraction_num2
+fraction_result3=fraction_num1*fraction_num2
+fraction_result4=fraction_num1/fraction_num2
+print(fraction_result1)
+print(fraction_result2)
+print(fraction_result3)
+print(fraction_result4)
