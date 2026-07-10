@@ -17,7 +17,7 @@ class Atm:
             (f)Enter 6 for exit
             """)
         try:
-           userInput=int(input('Enter your request'))
+           userInput=int(input('Enter your request: '))
            match userInput:
             case 1:
                 self.change_pin()
@@ -37,15 +37,16 @@ class Atm:
                 raise SystemExit
         except ValueError:
             print("Invalid request")
+            raise SystemExit
                 
 
     def change_pin(self):
         if(self.pin==""):
             self.create_pin()
         else:
-            oldPin=input("Enter old pin")
+            oldPin=input("Enter old pin: ")
             if(oldPin==self.pin):
-                newPin=input("Enter new pin")
+                newPin=input("Enter new pin: ")
                 self.pin=newPin
                 print(f'Your pin updated to {newPin}')
             else:
@@ -55,7 +56,7 @@ class Atm:
         if(self.pin==""):
             print("You have not configured your pin")
         else:
-            pin=input("Enter your pin")
+            pin=input("Enter your pin: ")
             if(pin==self.pin):
                 print(f'Your account balance is: {self.amount}$')
             else:
@@ -65,9 +66,9 @@ class Atm:
         if(self.pin==""):
             print("You have not configured your pin")
         else:
-            pin=input("Enter your pin")
+            pin=input("Enter your pin: ")
             if(self.pin==pin):
-                amount=input("Enter amount")
+                amount=input("Enter amount: ")
                 try:
                     amount=int(amount)
                     if(amount>0):
@@ -87,9 +88,9 @@ class Atm:
         if(self.pin==""):
             print("You have not configured your pin")
         else:
-            pin=input("Enter your pin")
+            pin=input("Enter your pin: ")
             if(self.pin==pin):
-                amount=input("Enter your amount")
+                amount=input("Enter your amount: ")
                 try:
                     amount=int(amount)
                     if(amount>0):
@@ -103,6 +104,8 @@ class Atm:
                 print('Wrong pin')
 
     def create_pin(self):
-        pin=input("Enter pin")
+        pin=input("Enter pin: ")
         self.pin=pin
         print(f'Your pin is set to {pin}')
+
+sbi=Atm()
