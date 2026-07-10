@@ -1,12 +1,32 @@
 class Atm:
     def __init__(self):
-        self.pin:str=""
-        self.amount:int=0
+        self.__pin:str=""
+        self.__amount:int=0
         
         while(True):
-            self.menu()
+            self.__menu()
+
+    def get_pin(self):
+        return self.__pin
     
-    def menu(self):
+    def get_amount(self):
+        return self.__amount
+    
+    def set_pin(self,newPin):
+        if(type(newPin)==str and (len(newPin)>=6 and len(newPin)<=12)):
+            self.__pin=newPin
+            print(f"Pin updated to {newPin}")
+        else:
+            print(f"Invalid pin")
+
+    def set_amount(self,newAmount):
+        if(type(newAmount)==int):
+            self.__amount=newAmount
+            print(f"Pin updated to {newAmount}")
+        else:
+            print(f"Invalid amount")
+    
+    def __menu(self):
         print("""
             Hello, how will you like to proceed:
             (a)Enter 1 for changing your pin
@@ -41,39 +61,39 @@ class Atm:
                 
 
     def change_pin(self):
-        if(self.pin==""):
+        if(self.__pin==""):
             self.create_pin()
         else:
             oldPin=input("Enter old pin: ")
-            if(oldPin==self.pin):
+            if(oldPin==self.__pin):
                 newPin=input("Enter new pin: ")
-                self.pin=newPin
+                self.__pin=newPin
                 print(f'Your pin updated to {newPin}')
             else:
                 print("Incorrect pin")
 
     def check_balance(self):
-        if(self.pin==""):
+        if(self.__pin==""):
             print("You have not configured your pin")
         else:
             pin=input("Enter your pin: ")
-            if(pin==self.pin):
-                print(f'Your account balance is: {self.amount}$')
+            if(pin==self.__pin):
+                print(f'Your account balance is: {self.__amount}$')
             else:
                 print("Incorrect pin")
     
     def withdraw(self):
-        if(self.pin==""):
+        if(self.__pin==""):
             print("You have not configured your pin")
         else:
             pin=input("Enter your pin: ")
-            if(self.pin==pin):
+            if(self.__pin==pin):
                 amount=input("Enter amount: ")
                 try:
                     amount=int(amount)
                     if(amount>0):
-                        if(self.amount>=amount):
-                            self.amount-=amount
+                        if(self.__amount>=amount):
+                            self.__amount-=amount
                             print(f'{amount}$ withdrawal successful')
                         else:
                             print('Insufficient balance')
@@ -85,16 +105,16 @@ class Atm:
                 print('Incorrct pin')
 
     def deposit(self):
-        if(self.pin==""):
+        if(self.__pin==""):
             print("You have not configured your pin")
         else:
             pin=input("Enter your pin: ")
-            if(self.pin==pin):
+            if(self.__pin==pin):
                 amount=input("Enter your amount: ")
                 try:
                     amount=int(amount)
                     if(amount>0):
-                        self.amount+=amount
+                        self.__amount+=amount
                         print(f'{amount}$ deposited successful')
                     else:
                         print("Invalid input")
@@ -105,7 +125,7 @@ class Atm:
 
     def create_pin(self):
         pin=input("Enter pin: ")
-        self.pin=pin
+        self.__pin=pin
         print(f'Your pin is set to {pin}')
 
 sbi=Atm()

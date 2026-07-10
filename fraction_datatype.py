@@ -4,39 +4,59 @@ class Fraction:
         if(b==0):
             raise ValueError("Invalid Denominator")
         
-        self.numerator=a
-        self.denominator=b
+        self.__numerator=a
+        self.__denominator=b
 
         if((a<0 and b <0) or b<0):
-            self.denominator*=-1
-            self.numerator*=-1
+            self.__denominator*=-1
+            self.__numerator*=-1
+
+    def get_numerator(self):
+        return self.__numerator
+    
+    def get_denominator(self):
+        return self.__denominator
+    
+    def set_numerator(self,newNumerator):
+        if(type(newNumerator)==int):
+            self.__pin=newNumerator
+            print(f"Numerator updated to {newNumerator}")
+        else:
+            print(f"Invalid value for numerator")
+
+    def set_denominator(self,newDenominator):
+        if(type(newDenominator)==int and newDenominator>0):
+            self.__amount=newDenominator
+            print(f"Pin updated to {newDenominator}")
+        else:
+            print(f"Invalid amount")
 
     def __str__(self):
-        return f"{self.numerator}/{self.denominator}"
+        return f"{self.__numerator}/{self.__denominator}"
         
     def __add__(self,other:Fraction):
-        if(self.denominator==other.denominator):
-            return Fraction(self.numerator+other.numerator,self.denominator)
+        if(self.__denominator==other.__denominator):
+            return Fraction(self.__numerator+other.__numerator,self.__denominator)
         else:
-            return Fraction(self.numerator*other.denominator+self.denominator*other.numerator,self.denominator*other.denominator)
+            return Fraction(self.__numerator*other.__denominator+self.__denominator*other.__numerator,self.__denominator*other.__denominator)
         
 
     def __sub__(self,other:Fraction):
-        if(self.denominator==other.denominator):
-            return Fraction(self.numerator-other.numerator,self.denominator)
+        if(self.__denominator==other.__denominator):
+            return Fraction(self.__numerator-other.__numerator,self.__denominator)
         else:
-            return Fraction(self.numerator*other.denominator-self.denominator*other.numerator,self.denominator*other.denominator)
+            return Fraction(self.__numerator*other.__denominator-self.__denominator*other.__numerator,self.__denominator*other.__denominator)
 
     def __mul__(self,other:Fraction):
-        return Fraction(self.numerator*other.numerator,self.denominator*other.denominator)
+        return Fraction(self.__numerator*other.__numerator,self.__denominator*other.__denominator)
     
     def __truediv__(self,other:Fraction):
-        if(other.denominator==0):
-            raise ValueError(f"Invalid Denominator: {other.denominator}")
-        return Fraction(self.numerator*other.denominator,self.denominator*other.numerator)
+        if(other.__denominator==0):
+            raise ValueError(f"Invalid Denominator: {other.__denominator}")
+        return Fraction(self.__numerator*other.__denominator,self.__denominator*other.__numerator)
     
     def print(self):
-        print(f"{self.numerator}/{self.denominator}")
+        print(f"{self.__numerator}/{self.__denominator}")
 
 fraction_num1=Fraction(6,7)
 fraction_num2=Fraction(9,8)
